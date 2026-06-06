@@ -187,7 +187,7 @@ code {
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 10;
   background: rgba(10, 13, 18, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -1039,7 +1039,7 @@ code {
     justify-content: center;
     transform: translateX(100%);
     transition: transform var(--transition);
-    z-index: 250;
+    z-index: 9999;
   }
 
   .nav-toggle--open span:nth-child(1) {
