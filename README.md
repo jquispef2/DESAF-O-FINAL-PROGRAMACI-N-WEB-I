@@ -144,14 +144,6 @@ Cada simulador incluye **3 casos de estudio precargados** con un solo clic, para
 
 > No requiere servidor ni instalación. Funciona directamente en el navegador.
 
----
-
-## Publicación
-
-| Recurso | Enlace |
-|---------|--------|
-| Página web publicada | *(agregar enlace)* |
-| Repositorio Git | *(agregar enlace)* |
 
 ---
 
