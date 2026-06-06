@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" fill="none">
+  <rect width="480" height="220" rx="12" fill="#111520"/>
+  <text x="240" y="28" font-family="sans-serif" font-size="12" fill="#8a9bb8" text-anchor="middle">Niveles de alerta de combustible</text>
+  <!-- Seguro -->
+  <rect x="20" y="50" width="130" height="150" rx="12" fill="#1a2130" stroke="#10b981" stroke-width="1.5"/>
+  <circle cx="85" cy="100" r="35" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="2"/>
+  <text x="85" y="107" font-family="sans-serif" font-size="18" fill="#10b981" text-anchor="middle">✓</text>
+  <text x="85" y="150" font-family="sans-serif" font-size="12" font-weight="bold" fill="#10b981" text-anchor="middle">SEGURO</text>
+  <text x="85" y="168" font-family="sans-serif" font-size="10" fill="#4a5a78" text-anchor="middle">> 40%</text>
+  <text x="85" y="183" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">Reserva óptima</text>
+  <!-- Alerta -->
+  <rect x="175" y="50" width="130" height="150" rx="12" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+  <circle cx="240" cy="100" r="35" fill="#f59e0b" opacity="0.12" stroke="#f59e0b" stroke-width="2"/>
+  <text x="240" y="107" font-family="sans-serif" font-size="18" fill="#f59e0b" text-anchor="middle">⚠</text>
+  <text x="240" y="150" font-family="sans-serif" font-size="12" font-weight="bold" fill="#f59e0b" text-anchor="middle">ALERTA</text>
+  <text x="240" y="168" font-family="sans-serif" font-size="10" fill="#4a5a78" text-anchor="middle">20% - 40%</text>
+  <text x="240" y="183" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">Reabastecer pronto</text>
+  <!-- Critico -->
+  <rect x="330" y="50" width="130" height="150" rx="12" fill="#1a2130" stroke="#ef4444" stroke-width="1.5"/>
+  <circle cx="395" cy="100" r="35" fill="#ef4444" opacity="0.12" stroke="#ef4444" stroke-width="2"/>
+  <text x="395" y="107" font-family="sans-serif" font-size="18" fill="#ef4444" text-anchor="middle">✕</text>
+  <text x="395" y="150" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ef4444" text-anchor="middle">CRÍTICO</text>
+  <text x="395" y="168" font-family="sans-serif" font-size="10" fill="#4a5a78" text-anchor="middle">&lt; 20%</text>
+  <text x="395" y="183" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">Riesgo de desabasto</text>
+</svg>

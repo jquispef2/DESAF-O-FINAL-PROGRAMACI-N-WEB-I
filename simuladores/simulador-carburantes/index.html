@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simulador de abastecimiento de carburantes - Herramienta educativa para calcular reservas de combustible" />
+  <title>SimuCombustible | Simulador de Abastecimiento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    .hero__visual {
+      width: 100%;
+      max-width: 560px;
+      margin: 2.5rem auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      border: 1px solid #2a3550;
+    }
+    .hero__visual img { width: 100%; display: block; }
+    .context-img-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .context-img-strip img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #2a3550;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .context-img-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <div class="header__brand">
+        <span class="header__title">SimuCombustible</span>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#contexto">Contexto</a></li>
+          <li><a class="nav__link" href="#simulador">Simulador</a></li>
+          <li><a class="nav__link" href="#resultados">Resultados</a></li>
+          <li><a class="nav__link" href="#casos">Casos de Estudio</a></li>
+          <li><a class="nav__link" href="#conclusiones">Conclusiones</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__grid"></div>
+      </div>
+      <div class="container hero__content">
+        <div class="hero__badge">Programación Web I · Escenario A</div>
+        <h1 class="hero__title" id="hero-title">
+          Simulador de<br />
+          <span class="hero__accent">Abastecimiento</span><br />
+          de Carburantes
+        </h1>
+        <p class="hero__desc">
+          Herramienta educativa para calcular cuántos días durará la reserva 
+          de una estación de servicio, detectar niveles críticos y tomar 
+          decisiones basadas en datos reales.
+        </p>
+        <div class="hero__actions">
+          <a href="#simulador" class="btn btn--primary">Iniciar simulación</a>
+          <a href="#contexto" class="btn btn--ghost">Ver contexto</a>
+        </div>
+        <div class="hero__stats" role="list">
+          <div class="hero__stat" role="listitem">
+            <strong>4</strong>
+            <span>Variables</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>∞</strong>
+            <span>Simulaciones</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>3</strong>
+            <span>Alertas</span>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <img src="img/hero-combustible.svg" alt="Visualización de tanque de combustible y proyección de días" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contexto" aria-labelledby="contexto-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Contexto</span>
+          <h2 class="section__title" id="contexto-title">¿Por qué es importante?</h2>
+        </div>
+        <div class="context-grid">
+          <article class="context-card context-card--highlight">
+            <h3 class="context-card__title">Escasez de carburantes</h3>
+            <p class="context-card__text">
+              Bolivia enfrenta períodos de desabastecimiento de combustible que afectan 
+              el transporte, la producción y la vida cotidiana de los ciudadanos.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Gestión de reservas</h3>
+            <p class="context-card__text">
+              Las estaciones de servicio deben administrar sus reservas de forma eficiente 
+              para garantizar el abastecimiento continuo de la población.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Nivel crítico</h3>
+            <p class="context-card__text">
+              Conocer con anticipación cuándo se alcanzará el nivel crítico permite 
+              tomar medidas preventivas antes de llegar al desabastecimiento total.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Modelo matemático</h3>
+            <p class="context-card__text">
+              <strong>Reserva diaria</strong> = Reserva anterior + Reabastecimiento − Consumo<br/>
+              Esta fórmula simple permite proyectar el comportamiento de la reserva en el tiempo.
+            </p>
+          </article>
+          <div class="context-img-strip">
+            <img src="img/niveles-alerta.svg" alt="Niveles de alerta: seguro, alerta y crítico" />
+            <img src="img/formula-combustible.svg" alt="Modelo matemático de reservas de combustible" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="simulador" aria-labelledby="simulador-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Herramienta</span>
+          <h2 class="section__title" id="simulador-title">Simulador interactivo</h2>
+          <p class="section__subtitle">Ingresa los datos de la estación de servicio y calcula la proyección de reservas.</p>
+        </div>
+
+        <div class="simulator-layout">
+          <div class="simulator-form-wrapper">
+            <div class="form-card" role="form" aria-labelledby="form-title">
+              <h3 class="form-card__title" id="form-title">
+                Datos de entrada
+              </h3>
+
+              <div class="form-group">
+                <label class="form-label" for="reservaInicial">
+                  Reserva inicial (litros)
+                  <span class="form-hint">Cantidad actual de combustible en la estación</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="reservaInicial"
+                  name="reservaInicial"
+                  placeholder="Ej: 10000"
+                  min="0"
+                  step="100"
+                  aria-required="true"
+                  aria-describedby="reservaInicial-error"
+                />
+                <span class="form-error" id="reservaInicial-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="consumoDiario">
+                  Consumo diario normal (litros/día)
+                  <span class="form-hint">Promedio de litros despachados por día</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="consumoDiario"
+                  name="consumoDiario"
+                  placeholder="Ej: 1200"
+                  min="0"
+                  step="50"
+                  aria-required="true"
+                  aria-describedby="consumoDiario-error"
+                />
+                <span class="form-error" id="consumoDiario-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reabastecimiento">
+                  Reabastecimiento diario (litros/día)
+                  <span class="form-hint">Litros que se reciben diariamente</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="reabastecimiento"
+                  name="reabastecimiento"
+                  placeholder="Ej: 300"
+                  min="0"
+                  step="50"
+                  aria-required="true"
+                  aria-describedby="reabastecimiento-error"
+                />
+                <span class="form-error" id="reabastecimiento-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="nivelCritico">
+                  Nivel crítico (litros)
+                  <span class="form-hint">Mínimo de reserva antes de emergencia</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="nivelCritico"
+                  name="nivelCritico"
+                  placeholder="Ej: 2000"
+                  min="0"
+                  step="100"
+                  aria-required="true"
+                  aria-describedby="nivelCritico-error"
+                />
+                <span class="form-error" id="nivelCritico-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="consumoAlto">
+                  Consumo en demanda alta (litros/día)
+                  <span class="form-hint">Consumo en situaciones de alta demanda (opcional)</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="consumoAlto"
+                  name="consumoAlto"
+                  placeholder="Ej: 2000"
+                  min="0"
+                  step="50"
+                  aria-describedby="consumoAlto-hint"
+                />
+                <span class="form-hint-block" id="consumoAlto-hint">Deja vacío para no comparar escenarios</span>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn--primary btn--full" id="btnCalcular" type="button">
+                  Calcular simulación
+                </button>
+                <button class="btn btn--outline btn--full" id="btnLimpiar" type="button">
+                  Limpiar datos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-results" id="resultadosRapidos" aria-live="polite" aria-label="Resultados rápidos">
+            <div class="quick-results__placeholder" id="placeholderResultados">
+              <p>Los resultados aparecerán aquí después de calcular</p>
+            </div>
+            <div class="quick-results__content" id="contenidoResultados" hidden>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados" aria-labelledby="resultados-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Proyección</span>
+          <h2 class="section__title" id="resultados-title">Tabla de proyección diaria</h2>
+          <p class="section__subtitle">Evolución de la reserva día a día según los parámetros ingresados.</p>
+        </div>
+
+        <div id="tablaWrapper" class="table-wrapper" hidden aria-live="polite">
+        </div>
+
+        <div class="table-placeholder" id="tablaPlaceholder">
+          <p>Ejecuta la simulación para ver la proyección día a día</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="casos" aria-labelledby="casos-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Verificación</span>
+          <h2 class="section__title" id="casos-title">Casos de estudio para probar</h2>
+          <p class="section__subtitle">Ejemplos predefinidos para verificar que el simulador funciona correctamente.</p>
+        </div>
+
+        <div class="cases-grid">
+
+          <article class="case-card" aria-labelledby="caso1-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 1">01</span>
+              <h3 class="case-card__title" id="caso1-title">Reserva estándar</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 1">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Reserva inicial</td><td><strong>10,000 L</strong></td></tr>
+                  <tr><td>Consumo diario</td><td><strong>1,200 L/día</strong></td></tr>
+                  <tr><td>Reabastecimiento</td><td><strong>300 L/día</strong></td></tr>
+                  <tr><td>Nivel crítico</td><td><strong>2,000 L</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">~8 días hasta nivel crítico</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(1)" aria-label="Cargar caso de estudio 1 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+          <article class="case-card" aria-labelledby="caso2-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 2">02</span>
+              <h3 class="case-card__title" id="caso2-title">Demanda alta (crisis)</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 2">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Reserva inicial</td><td><strong>5,000 L</strong></td></tr>
+                  <tr><td>Consumo diario</td><td><strong>800 L/día</strong></td></tr>
+                  <tr><td>Reabastecimiento</td><td><strong>0 L/día</strong></td></tr>
+                  <tr><td>Nivel crítico</td><td><strong>1,000 L</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">~5 días hasta nivel crítico</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(2)" aria-label="Cargar caso de estudio 2 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+          <article class="case-card" aria-labelledby="caso3-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 3">03</span>
+              <h3 class="case-card__title" id="caso3-title">Reabastecimiento alto</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 3">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Reserva inicial</td><td><strong>8,000 L</strong></td></tr>
+                  <tr><td>Consumo diario</td><td><strong>1,500 L/día</strong></td></tr>
+                  <tr><td>Reabastecimiento</td><td><strong>1,500 L/día</strong></td></tr>
+                  <tr><td>Nivel crítico</td><td><strong>3,000 L</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">Reserva estable — no llega a crítico</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(3)" aria-label="Cargar caso de estudio 3 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conclusiones" aria-labelledby="conclusiones-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Aprendizaje</span>
+          <h2 class="section__title" id="conclusiones-title">Conclusiones</h2>
+        </div>
+        <div class="conclusions-grid">
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">¿Qué aprendimos?</h3>
+            <ul class="conclusion-list">
+              <li>La diferencia entre consumo y reabastecimiento determina si una reserva crece o decrece diariamente.</li>
+              <li>Un nivel crítico bien definido permite anticipar medidas antes del desabastecimiento total.</li>
+              <li>En situaciones de demanda alta (filas largas, rumores de escasez), la reserva puede agotarse mucho más rápido de lo normal.</li>
+              <li>El modelo matemático simple <code>Reserva = Reserva anterior + Reabastecimiento − Consumo</code> es suficiente para proyecciones de corto plazo.</li>
+            </ul>
+          </div>
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">Utilidad del simulador</h3>
+            <ul class="conclusion-list">
+              <li>Ayuda a estaciones de servicio a planificar sus pedidos de combustible con anticipación.</li>
+              <li>Permite comparar escenarios normales versus de alta demanda.</li>
+              <li>Sirve como herramienta educativa para entender el impacto de la escasez de carburantes.</li>
+              <li>Puede extenderse para modelar múltiples tipos de combustible (gasolina, diésel, GNV).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span>SimuCombustible</span>
+      </div>
+      <div class="footer__credits">
+        <p><strong>Proyecto Final — Programación Web I</strong></p>
+        <p>Desarrollado con HTML5, CSS3 y JavaScript Vanilla</p>
+        <p class="footer__tech">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>DOM</span>
+        </p>
+      </div>
+      <p class="footer__copy">
+        &copy; 2026 · Simulador educativo. No representa posición política alguna.
+      </p>
+    </div>
+    <p class="footer__developer">Proyecto desarrollado por <strong>Johann Edibert Quispe Flores</strong></p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <div style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:400;">
+    <a href="../index.html"
+       style="display:inline-flex;align-items:center;gap:0.5rem;background:#1a2130;color:#f0f4ff;
+              border:1px solid #2a3550;border-radius:12px;padding:0.6rem 1.1rem;font-family:'DM Sans',sans-serif;
+              font-size:0.82rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+              transition:all 220ms cubic-bezier(0.4,0,0.2,1);"
+       onmouseover="this.style.background='#1f2940';this.style.borderColor='#334060';"
+       onmouseout="this.style.background='#1a2130';this.style.borderColor='#2a3550';"
+       aria-label="Volver a página principal">
+      &#8592; Página principal
+    </a>
+  </div>
+
+</body>
+</html>

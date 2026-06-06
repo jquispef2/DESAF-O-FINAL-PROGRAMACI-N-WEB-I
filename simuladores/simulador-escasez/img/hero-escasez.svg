@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0d12"/>
+      <stop offset="100%" stop-color="#120a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="380" fill="url(#bg)"/>
+  <!-- Glow -->
+  <circle cx="300" cy="190" r="180" fill="#ef4444" opacity="0.03"/>
+  <!-- Rumor spread visualization -->
+  <!-- Central node: rumor origin -->
+  <circle cx="300" cy="190" r="30" fill="#1a2130" stroke="#ef4444" stroke-width="2"/>
+  <text x="300" y="186" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle">RUMOR</text>
+  <text x="300" y="198" font-family="sans-serif" font-size="8" fill="#4a5a78" text-anchor="middle">origen</text>
+  <!-- Wave rings -->
+  <circle cx="300" cy="190" r="70" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.3" stroke-dasharray="6,4"/>
+  <circle cx="300" cy="190" r="120" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.2" stroke-dasharray="6,4"/>
+  <circle cx="300" cy="190" r="170" fill="none" stroke="#ef4444" stroke-width="1" opacity="0.1" stroke-dasharray="6,4"/>
+  <!-- Person nodes wave 1 -->
+  <g>
+    <circle cx="300" cy="110" r="16" fill="#1f2940" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="300" y="115" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#ef4444">👤</text>
+    <line x1="300" y1="160" x2="300" y2="126" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+    
+    <circle cx="370" cy="130" r="16" fill="#1f2940" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="370" y="135" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#ef4444">👤</text>
+    <line x1="330" y1="170" x2="356" y2="140" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+    
+    <circle cx="230" cy="130" r="16" fill="#1f2940" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="230" y="135" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#ef4444">👤</text>
+    <line x1="270" y1="170" x2="244" y2="140" stroke="#ef4444" stroke-width="1" opacity="0.5"/>
+  </g>
+  <!-- Person nodes wave 2 -->
+  <g opacity="0.7">
+    <circle cx="160" cy="100" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="160" y="105" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+    <circle cx="130" cy="180" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="130" y="185" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+    <circle cx="200" cy="70" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="200" y="75" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+    <circle cx="400" cy="100" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="400" y="105" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+    <circle cx="440" cy="190" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="440" y="195" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+    <circle cx="390" cy="70" r="14" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="390" y="75" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#f59e0b">👤</text>
+  </g>
+  <!-- Stock indicator -->
+  <rect x="30" y="260" width="160" height="90" rx="12" fill="#1a2130" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="110" y="284" font-family="sans-serif" font-size="11" fill="#8a9bb8" text-anchor="middle">Stock disponible</text>
+  <rect x="45" y="295" width="130" height="14" rx="7" fill="#111520"/>
+  <rect x="45" y="295" width="35" height="14" rx="7" fill="#ef4444" opacity="0.8"/>
+  <text x="110" y="326" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ef4444" text-anchor="middle">27% restante</text>
+  <text x="110" y="341" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">stock agotado en 3 días</text>
+  <!-- Demand indicator -->
+  <rect x="410" y="260" width="160" height="90" rx="12" fill="#1a2130" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="490" y="284" font-family="sans-serif" font-size="11" fill="#8a9bb8" text-anchor="middle">Demanda por pánico</text>
+  <text x="490" y="316" font-family="sans-serif" font-size="22" font-weight="bold" fill="#f59e0b" text-anchor="middle">+340%</text>
+  <text x="490" y="334" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">sobre demanda normal</text>
+  <text x="490" y="346" font-family="sans-serif" font-size="9" fill="#4a5a78" text-anchor="middle">día 1 del rumor</text>
+</svg>

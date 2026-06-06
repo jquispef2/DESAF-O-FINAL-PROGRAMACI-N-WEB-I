@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simulador de costo de transporte - Herramienta educativa para calcular el impacto de desvíos y bloqueos en el costo de traslado" />
+  <title>SimuTransporte | Simulador de Costo de Transporte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    .hero__visual {
+      width: 100%;
+      max-width: 560px;
+      margin: 2.5rem auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      border: 1px solid #2a3550;
+    }
+    .hero__visual img { width: 100%; display: block; }
+    .context-img-wrap {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .context-img-wrap img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #2a3550;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .context-img-wrap { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <div class="header__brand">
+        <span class="header__title">SimuTransporte</span>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#contexto">Contexto</a></li>
+          <li><a class="nav__link" href="#simulador">Simulador</a></li>
+          <li><a class="nav__link" href="#resultados">Resultados</a></li>
+          <li><a class="nav__link" href="#casos">Casos de Estudio</a></li>
+          <li><a class="nav__link" href="#conclusiones">Conclusiones</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__grid"></div>
+      </div>
+      <div class="container hero__content">
+        <div class="hero__badge">Programación Web I · Escenario C</div>
+        <h1 class="hero__title" id="hero-title">
+          Simulador de<br />
+          <span class="hero__accent">Costo de</span><br />
+          Transporte
+        </h1>
+        <p class="hero__desc">
+          Herramienta educativa para estimar cómo los bloqueos, desvíos 
+          y el alza de combustible incrementan el costo de traslado 
+          semanal y mensual de personas y transportistas.
+        </p>
+        <div class="hero__actions">
+          <a href="#simulador" class="btn btn--primary">Iniciar simulación</a>
+          <a href="#contexto" class="btn btn--ghost">Ver contexto</a>
+        </div>
+        <div class="hero__stats" role="list">
+          <div class="hero__stat" role="listitem">
+            <strong>4</strong>
+            <span>Variables</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>5</strong>
+            <span>Cálculos</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>3</strong>
+            <span>Casos</span>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <img src="img/hero-transporte.svg" alt="Ilustración de ruta normal vs ruta con desvío" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contexto" aria-labelledby="contexto-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Contexto</span>
+          <h2 class="section__title" id="contexto-title">¿Por qué es importante?</h2>
+        </div>
+        <div class="context-grid">
+          <article class="context-card context-card--highlight">
+            <h3 class="context-card__title">Bloqueos y desvíos</h3>
+            <p class="context-card__text">
+              Los conflictos sociales y bloqueos de carreteras obligan a transportistas 
+              y ciudadanos a tomar rutas más largas, aumentando el tiempo y el costo 
+              del traslado de forma significativa.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Alza de combustible</h3>
+            <p class="context-card__text">
+              El incremento del precio del combustible eleva directamente el costo 
+              por kilómetro recorrido, afectando a conductores particulares, 
+              transportistas y empresas de logística.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Impacto acumulado</h3>
+            <p class="context-card__text">
+              Un pequeño desvío diario puede representar un gasto adicional enorme 
+              al mes. La diferencia entre la ruta normal y la ruta con desvío se 
+              acumula semana tras semana.
+            </p>
+          </article>
+          <article class="context-card">
+            <h3 class="context-card__title">Modelo matemático</h3>
+            <p class="context-card__text">
+              <strong>Costo = Distancia × Costo/km × Viajes</strong><br />
+              Esta fórmula permite comparar el costo de la ruta normal frente 
+              a la ruta con desvío en períodos semanales y mensuales.
+            </p>
+          </article>
+          <div class="context-img-wrap">
+            <img src="img/mapa-rutas.svg" alt="Mapa de ruta normal versus ruta con desvío" />
+            <img src="img/icono-costo.svg" alt="Gráfico comparativo de costos semanales" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="simulador" aria-labelledby="simulador-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Herramienta</span>
+          <h2 class="section__title" id="simulador-title">Simulador interactivo</h2>
+          <p class="section__subtitle">Ingresa los datos de tu ruta y calcula el impacto del desvío en tu gasto de transporte.</p>
+        </div>
+
+        <div class="simulator-layout">
+          <div class="simulator-form-wrapper">
+            <div class="form-card" role="form" aria-labelledby="form-title">
+              <h3 class="form-card__title" id="form-title">Datos de entrada</h3>
+
+              <div class="form-group">
+                <label class="form-label" for="distanciaNormal">
+                  Distancia normal (km)
+                  <span class="form-hint">Recorrido habitual sin bloqueos ni desvíos</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="distanciaNormal"
+                  name="distanciaNormal"
+                  placeholder="Ej: 10"
+                  min="0"
+                  step="0.5"
+                  aria-required="true"
+                  aria-describedby="distanciaNormal-error"
+                />
+                <span class="form-error" id="distanciaNormal-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="distanciaDesvio">
+                  Distancia con desvío (km)
+                  <span class="form-hint">Recorrido alternativo por bloqueo o desvío</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="distanciaDesvio"
+                  name="distanciaDesvio"
+                  placeholder="Ej: 18"
+                  min="0"
+                  step="0.5"
+                  aria-required="true"
+                  aria-describedby="distanciaDesvio-error"
+                />
+                <span class="form-error" id="distanciaDesvio-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="costoPorKm">
+                  Costo por kilómetro (Bs/km)
+                  <span class="form-hint">Costo de combustible y desgaste por km recorrido</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="costoPorKm"
+                  name="costoPorKm"
+                  placeholder="Ej: 1.5"
+                  min="0"
+                  step="0.1"
+                  aria-required="true"
+                  aria-describedby="costoPorKm-error"
+                />
+                <span class="form-error" id="costoPorKm-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="viajesPorSemana">
+                  Número de viajes por semana
+                  <span class="form-hint">Cantidad de veces que realizas el recorrido por semana</span>
+                </label>
+                <input
+                  class="form-input"
+                  type="number"
+                  id="viajesPorSemana"
+                  name="viajesPorSemana"
+                  placeholder="Ej: 10"
+                  min="1"
+                  step="1"
+                  aria-required="true"
+                  aria-describedby="viajesPorSemana-error"
+                />
+                <span class="form-error" id="viajesPorSemana-error" role="alert" aria-live="polite"></span>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn--primary btn--full" id="btnCalcular" type="button">
+                  Calcular simulación
+                </button>
+                <button class="btn btn--outline btn--full" id="btnLimpiar" type="button">
+                  Limpiar datos
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-results" id="resultadosRapidos" aria-live="polite" aria-label="Resultados rápidos">
+            <div class="quick-results__placeholder" id="placeholderResultados">
+              <p>Los resultados aparecerán aquí después de calcular</p>
+            </div>
+            <div class="quick-results__content" id="contenidoResultados" hidden>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resultados" aria-labelledby="resultados-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Proyección</span>
+          <h2 class="section__title" id="resultados-title">Tabla de proyección semanal</h2>
+          <p class="section__subtitle">Evolución del costo adicional semana a semana durante 8 semanas.</p>
+        </div>
+
+        <div id="tablaWrapper" class="table-wrapper" hidden aria-live="polite">
+        </div>
+
+        <div class="table-placeholder" id="tablaPlaceholder">
+          <p>Ejecuta la simulación para ver la proyección semana a semana</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="casos" aria-labelledby="casos-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Verificación</span>
+          <h2 class="section__title" id="casos-title">Casos de estudio para probar</h2>
+          <p class="section__subtitle">Ejemplos predefinidos para verificar que el simulador funciona correctamente.</p>
+        </div>
+
+        <div class="cases-grid">
+
+          <article class="case-card" aria-labelledby="caso1-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 1">01</span>
+              <h3 class="case-card__title" id="caso1-title">Desvío por bloqueo</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 1">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Distancia normal</td><td><strong>10 km</strong></td></tr>
+                  <tr><td>Distancia con desvío</td><td><strong>18 km</strong></td></tr>
+                  <tr><td>Costo por km</td><td><strong>1.5 Bs/km</strong></td></tr>
+                  <tr><td>Viajes por semana</td><td><strong>10</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">+Bs 120 adicional por semana</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(1)" aria-label="Cargar caso de estudio 1 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+          <article class="case-card" aria-labelledby="caso2-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 2">02</span>
+              <h3 class="case-card__title" id="caso2-title">Ruta larga de carga</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 2">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Distancia normal</td><td><strong>50 km</strong></td></tr>
+                  <tr><td>Distancia con desvío</td><td><strong>80 km</strong></td></tr>
+                  <tr><td>Costo por km</td><td><strong>2.5 Bs/km</strong></td></tr>
+                  <tr><td>Viajes por semana</td><td><strong>5</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">+Bs 375 adicional por semana</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(2)" aria-label="Cargar caso de estudio 2 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+          <article class="case-card" aria-labelledby="caso3-title">
+            <div class="case-card__header">
+              <span class="case-card__num" aria-label="Caso 3">03</span>
+              <h3 class="case-card__title" id="caso3-title">Transporte escolar</h3>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table" aria-label="Datos del caso 3">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Distancia normal</td><td><strong>5 km</strong></td></tr>
+                  <tr><td>Distancia con desvío</td><td><strong>12 km</strong></td></tr>
+                  <tr><td>Costo por km</td><td><strong>1.2 Bs/km</strong></td></tr>
+                  <tr><td>Viajes por semana</td><td><strong>10</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">+Bs 84 adicional por semana</span>
+              </div>
+            </div>
+            <button class="btn btn--case" onclick="cargarCaso(3)" aria-label="Cargar caso de estudio 3 en el simulador">
+              Cargar este caso
+            </button>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conclusiones" aria-labelledby="conclusiones-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Aprendizaje</span>
+          <h2 class="section__title" id="conclusiones-title">Conclusiones</h2>
+        </div>
+        <div class="conclusions-grid">
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">¿Qué aprendimos?</h3>
+            <ul class="conclusion-list">
+              <li>Un desvío que parece pequeño en kilómetros genera un gasto adicional significativo al multiplicarse por la frecuencia de viajes.</li>
+              <li>El costo por kilómetro incluye no solo el combustible, sino también el desgaste del vehículo y el tiempo perdido.</li>
+              <li>Los bloqueos afectan de forma desproporcionada a quienes deben realizar muchos viajes por semana: transportistas, comerciantes y trabajadores.</li>
+              <li>La fórmula <code>Costo = Distancia × Costo/km × Viajes</code> permite estimar con precisión el impacto económico real.</li>
+            </ul>
+          </div>
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">Utilidad del simulador</h3>
+            <ul class="conclusion-list">
+              <li>Permite a conductores y transportistas cuantificar el costo real de los desvíos antes de decidir una ruta.</li>
+              <li>Ayuda a negociar tarifas de transporte cuando las rutas normales están bloqueadas.</li>
+              <li>Sirve como herramienta educativa para entender el impacto económico de los conflictos sociales en el transporte.</li>
+              <li>Puede extenderse para incluir el costo del tiempo y el impacto en la productividad laboral.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span>SimuTransporte</span>
+      </div>
+      <div class="footer__credits">
+        <p><strong>Proyecto Final — Programación Web I</strong></p>
+        <p>Desarrollado con HTML5, CSS3 y JavaScript Vanilla</p>
+        <p class="footer__tech">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>DOM</span>
+        </p>
+      </div>
+      <p class="footer__copy">
+        &copy; 2026 · Simulador educativo. No representa posición política alguna.
+      </p>
+    </div>
+    <p class="footer__developer">Proyecto desarrollado por <strong>Johann Edibert Quispe Flores</strong></p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <div style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:400;">
+    <a href="../index.html"
+       style="display:inline-flex;align-items:center;gap:0.5rem;background:#1a2130;color:#f0f4ff;
+              border:1px solid #2a3550;border-radius:12px;padding:0.6rem 1.1rem;font-family:'DM Sans',sans-serif;
+              font-size:0.82rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+              transition:all 220ms cubic-bezier(0.4,0,0.2,1);"
+       onmouseover="this.style.background='#1f2940';this.style.borderColor='#334060';"
+       onmouseout="this.style.background='#1a2130';this.style.borderColor='#2a3550';"
+       aria-label="Volver a página principal">
+      &#8592; Página principal
+    </a>
+  </div>
+
+</body>
+</html>

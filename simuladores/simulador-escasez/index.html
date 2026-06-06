@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simulador de rumor de escasez y compras por pánico - Herramienta educativa para calcular cómo un rumor afecta la demanda y el stock disponible" />
+  <title>SimuEscasez | Simulador de Rumor de Escasez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+  <style>
+    .hero__visual {
+      width: 100%;
+      max-width: 560px;
+      margin: 2.5rem auto 0;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      border: 1px solid #2a3550;
+    }
+    .hero__visual img { width: 100%; display: block; }
+    .context-img-strip {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .context-img-strip img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #2a3550;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .context-img-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <div class="header__brand">
+        <span class="header__title">SimuEscasez</span>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#contexto">Contexto</a></li>
+          <li><a class="nav__link" href="#simulador">Simulador</a></li>
+          <li><a class="nav__link" href="#resultados">Resultados</a></li>
+          <li><a class="nav__link" href="#casos">Casos de Estudio</a></li>
+          <li><a class="nav__link" href="#conclusiones">Conclusiones</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__grid"></div>
+      </div>
+      <div class="container hero__content">
+        <div class="hero__badge">Programación Web I &middot; Escenario E</div>
+        <h1 class="hero__title" id="hero-title">
+          Simulador de<br />
+          <span class="hero__accent">Rumor de Escasez</span><br />
+          y Pánico
+        </h1>
+        <p class="hero__desc">
+          Herramienta educativa que modela cómo un rumor de desabastecimiento
+          dispara las compras por pánico, eleva la demanda real y puede
+          agotar el stock disponible en horas.
+        </p>
+        <div class="hero__actions">
+          <a href="#simulador" class="btn btn--primary">Iniciar simulación</a>
+          <a href="#contexto" class="btn btn--ghost">Ver contexto</a>
+        </div>
+        <div class="hero__stats" role="list">
+          <div class="hero__stat" role="listitem">
+            <strong>4</strong>
+            <span>Variables</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>3</strong>
+            <span>Alertas</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <strong>7</strong>
+            <span>Días proy.</span>
+          </div>
+        </div>
+        <div class="hero__visual">
+          <img src="img/hero-escasez.svg" alt="Visualización de propagación del rumor y colapso del stock" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="contexto" aria-labelledby="contexto-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Escenario E</span>
+          <h2 class="section__title" id="contexto-title">Contexto del problema</h2>
+          <p class="section__subtitle">Cuando circulan rumores de escasez, el comportamiento de compra cambia drásticamente.</p>
+        </div>
+        <div class="context-grid">
+          <div class="context-card">
+            <h3 class="context-card__title">El rumor</h3>
+            <p class="context-card__text">Un mensaje o noticia, verdadera o falsa, genera incertidumbre sobre la disponibilidad futura de un producto básico.</p>
+          </div>
+          <div class="context-card context-card--highlight">
+            <h3 class="context-card__title">Compras por pánico</h3>
+            <p class="context-card__text">El miedo a quedarse sin el producto hace que cada persona compre mucho más de lo que necesita, multiplicando la demanda real.</p>
+          </div>
+          <div class="context-card">
+            <h3 class="context-card__title">Desabastecimiento real</h3>
+            <p class="context-card__text">Aunque el stock era suficiente para la demanda normal, el incremento artificial agota las reservas y convierte el rumor en realidad.</p>
+          </div>
+          <div class="context-card">
+            <h3 class="context-card__title">El ciclo</h3>
+            <p class="context-card__text">El desabastecimiento causado por el pánico refuerza el rumor original, generando un ciclo de retroalimentación que escala rápidamente.</p>
+          </div>
+          <div class="context-img-strip">
+            <img src="img/grafico-demanda.svg" alt="Curva de demanda vs stock bajo rumor de escasez" />
+            <img src="img/icono-panico.svg" alt="Comparación de stock en tres escenarios: sin rumor, día 1 y día 2-3" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="simulador" aria-labelledby="simulador-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Cálculos</span>
+          <h2 class="section__title" id="simulador-title">Simulador interactivo</h2>
+          <p class="section__subtitle">Ingresa los datos y observa cómo cambia la demanda ante un rumor de escasez.</p>
+        </div>
+        <div class="simulator-layout">
+
+          <div class="form-card" role="form" aria-label="Formulario de datos del simulador">
+            <h3 class="form-card__title">
+              Parámetros de entrada
+            </h3>
+
+            <div class="form-group">
+              <label class="form-label" for="demandaNormal">
+                Demanda normal
+                <span class="form-hint">(unidades por día)</span>
+              </label>
+              <input
+                class="form-input"
+                type="number"
+                id="demandaNormal"
+                name="demandaNormal"
+                min="1"
+                placeholder="ej. 200"
+                aria-describedby="demandaNormal-error"
+              />
+              <span class="form-error" id="demandaNormal-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="porcentajeRumor">
+                Porcentaje de aumento por rumor
+                <span class="form-hint">(% extra sobre la demanda normal)</span>
+              </label>
+              <input
+                class="form-input"
+                type="number"
+                id="porcentajeRumor"
+                name="porcentajeRumor"
+                min="0"
+                max="999"
+                placeholder="ej. 150"
+                aria-describedby="porcentajeRumor-error"
+              />
+              <span class="form-error" id="porcentajeRumor-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="stockDisponible">
+                Stock disponible
+                <span class="form-hint">(unidades totales en almacén)</span>
+              </label>
+              <input
+                class="form-input"
+                type="number"
+                id="stockDisponible"
+                name="stockDisponible"
+                min="1"
+                placeholder="ej. 1000"
+                aria-describedby="stockDisponible-error"
+              />
+              <span class="form-error" id="stockDisponible-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="numFamilias">
+                Número de personas o familias
+                <span class="form-hint">(cantidad de compradores)</span>
+              </label>
+              <input
+                class="form-input"
+                type="number"
+                id="numFamilias"
+                name="numFamilias"
+                min="1"
+                placeholder="ej. 80"
+                aria-describedby="numFamilias-error"
+              />
+              <span class="form-error" id="numFamilias-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn--primary btn--full" id="btnCalcular" type="button">
+                Calcular simulación
+              </button>
+              <button class="btn btn--outline btn--full" id="btnLimpiar" type="button">
+                Limpiar datos
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="quick-results" id="quickResults" aria-live="polite" aria-label="Resultados del simulador">
+              <div class="quick-results__placeholder" id="placeholderResultados">
+                <p>Ingresa los datos y presiona <strong>Calcular simulación</strong> para ver los resultados.</p>
+              </div>
+              <div class="quick-results__content" id="contenidoResultados" hidden>
+                <div class="result-cards-grid" id="tarjetasResultado"></div>
+                <div id="alertaEstado"></div>
+                <div id="bloqueComparacion"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="resultados" aria-labelledby="resultados-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Proyección</span>
+          <h2 class="section__title" id="resultados-title">Tabla de proyección diaria</h2>
+          <p class="section__subtitle">Evolución del stock durante los próximos días bajo demanda de pánico.</p>
+        </div>
+
+        <div class="table-placeholder" id="tablaPlaceholder" role="status">
+          <p>Ejecuta la simulación para generar la proyección diaria.</p>
+        </div>
+        <div id="tablaWrapper" hidden>
+          <div class="table-wrapper">
+            <table class="projection-table" aria-label="Proyección diaria del stock">
+              <thead>
+                <tr>
+                  <th scope="col">Día</th>
+                  <th scope="col">Demanda normal</th>
+                  <th scope="col">Demanda pánico</th>
+                  <th scope="col">Stock restante</th>
+                  <th scope="col">Estado</th>
+                </tr>
+              </thead>
+              <tbody id="cuerpoTabla"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="casos" aria-labelledby="casos-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Casos de estudio</span>
+          <h2 class="section__title" id="casos-title">Casos de estudio para probar</h2>
+          <p class="section__subtitle">Ejemplos predefinidos para comprobar que la simulación funciona correctamente.</p>
+        </div>
+        <div class="cases-grid">
+
+          <div class="case-card">
+            <div class="case-card__header">
+              <span class="case-card__num">01</span>
+              <div>
+                <h3 class="case-card__title">Mercado de barrio</h3>
+                <p style="font-size:0.82rem;color:var(--color-text-muted);">Rumor moderado, stock suficiente</p>
+              </div>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Demanda normal</td><td><strong>200 unid/día</strong></td></tr>
+                  <tr><td>% aumento rumor</td><td><strong>80%</strong></td></tr>
+                  <tr><td>Stock disponible</td><td><strong>1 500 unidades</strong></td></tr>
+                  <tr><td>Familias</td><td><strong>60 familias</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">Demanda sube a 360 unid/día; stock dura aprox. 4 días</span>
+              </div>
+            </div>
+            <button class="btn btn--case" data-caso="1" type="button">Cargar caso 1</button>
+          </div>
+
+          <div class="case-card">
+            <div class="case-card__header">
+              <span class="case-card__num">02</span>
+              <div>
+                <h3 class="case-card__title">Supermercado urbano</h3>
+                <p style="font-size:0.82rem;color:var(--color-text-muted);">Rumor fuerte, stock crítico</p>
+              </div>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Demanda normal</td><td><strong>500 unid/día</strong></td></tr>
+                  <tr><td>% aumento rumor</td><td><strong>200%</strong></td></tr>
+                  <tr><td>Stock disponible</td><td><strong>2 000 unidades</strong></td></tr>
+                  <tr><td>Familias</td><td><strong>150 familias</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">Demanda sube a 1 500 unid/día; stock se agota en menos de 2 días</span>
+              </div>
+            </div>
+            <button class="btn btn--case" data-caso="2" type="button">Cargar caso 2</button>
+          </div>
+
+          <div class="case-card">
+            <div class="case-card__header">
+              <span class="case-card__num">03</span>
+              <div>
+                <h3 class="case-card__title">Tienda rural</h3>
+                <p style="font-size:0.82rem;color:var(--color-text-muted);">Demanda baja, rumor intenso</p>
+              </div>
+            </div>
+            <div class="case-card__body">
+              <table class="case-table">
+                <thead>
+                  <tr><th>Dato</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Demanda normal</td><td><strong>80 unid/día</strong></td></tr>
+                  <tr><td>% aumento rumor</td><td><strong>300%</strong></td></tr>
+                  <tr><td>Stock disponible</td><td><strong>600 unidades</strong></td></tr>
+                  <tr><td>Familias</td><td><strong>30 familias</strong></td></tr>
+                </tbody>
+              </table>
+              <div class="case-card__expected">
+                <span class="expected-label">Resultado esperado:</span>
+                <span class="expected-value">Demanda sube a 320 unid/día; stock se agota en aprox. 2 días</span>
+              </div>
+            </div>
+            <button class="btn btn--case" data-caso="3" type="button">Cargar caso 3</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="conclusiones" aria-labelledby="conclusiones-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Análisis</span>
+          <h2 class="section__title" id="conclusiones-title">Conclusiones</h2>
+          <p class="section__subtitle">Lo que el modelo matemático nos enseña sobre el comportamiento de pánico.</p>
+        </div>
+        <div class="conclusions-grid">
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">Hallazgos matemáticos</h3>
+            <ul class="conclusion-list" style="list-style:none;padding:0;">
+              <li>Un rumor del 100% duplica la demanda y reduce a la mitad la duración del stock.</li>
+              <li>Un rumor del 200% triplica la demanda y agota en un tercio del tiempo normal.</li>
+              <li>La demanda por pánico crece linealmente con el porcentaje, pero el impacto en el stock es exponencial.</li>
+              <li>Incluso un rumor modesto del 50% puede generar escasez real si el stock está al límite.</li>
+            </ul>
+          </div>
+          <div class="conclusion-block">
+            <h3 class="conclusion-block__title">Implicaciones sociales</h3>
+            <ul class="conclusion-list" style="list-style:none;padding:0;">
+              <li>El pánico colectivo puede convertir un rumor falso en una escasez real.</li>
+              <li>La información veraz y oportuna es la herramienta más efectiva contra el desabasto inducido.</li>
+              <li>Las políticas de racionamiento temporal pueden evitar que el ciclo de pánico escale.</li>
+              <li>La educación sobre el comportamiento de manada reduce la vulnerabilidad de la comunidad.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        SimuEscasez
+      </div>
+      <div class="footer__credits">
+        <p><strong>Desafío Final &mdash; Programación Web I</strong></p>
+        <p>Escenario E: Simulador de rumor de escasez y compras por pánico</p>
+        <div class="footer__tech">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>DOM</span>
+        </div>
+      </div>
+      <p class="footer__copy">Herramienta educativa &mdash; sin fines políticos</p>
+    </div>
+    <p class="footer__developer">Proyecto desarrollado por <strong>Johann Edibert Quispe Flores</strong></p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+  <div style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:400;">
+    <a href="../index.html"
+       style="display:inline-flex;align-items:center;gap:0.5rem;background:#1a2130;color:#f0f4ff;
+              border:1px solid #2a3550;border-radius:12px;padding:0.6rem 1.1rem;font-family:'DM Sans',sans-serif;
+              font-size:0.82rem;font-weight:600;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);
+              transition:all 220ms cubic-bezier(0.4,0,0.2,1);"
+       onmouseover="this.style.background='#1f2940';this.style.borderColor='#334060';"
+       onmouseout="this.style.background='#1a2130';this.style.borderColor='#2a3550';"
+       aria-label="Volver a página principal">
+      &#8592; Página principal
+    </a>
+  </div>
+
+</body>
+</html>

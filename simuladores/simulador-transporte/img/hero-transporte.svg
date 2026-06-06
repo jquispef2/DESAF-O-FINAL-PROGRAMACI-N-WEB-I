@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" fill="none">
+  <defs>
+    <linearGradient id="road" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a2130"/>
+      <stop offset="100%" stop-color="#1f2940"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0d12"/>
+      <stop offset="100%" stop-color="#111520"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="600" height="380" fill="url(#sky)"/>
+  <!-- Mountains -->
+  <polygon points="0,280 80,160 160,280" fill="#111a28"/>
+  <polygon points="60,280 160,120 260,280" fill="#131c2c"/>
+  <polygon points="200,280 310,100 420,280" fill="#0f1822"/>
+  <polygon points="350,280 460,130 570,280" fill="#111a28"/>
+  <!-- Road -->
+  <path d="M0,340 Q300,260 600,340 L600,380 L0,380Z" fill="#1a2130"/>
+  <path d="M0,340 Q300,270 600,340" stroke="#2a3550" stroke-width="2"/>
+  <!-- Road markings -->
+  <path d="M50,360 L120,355" stroke="#f59e0b" stroke-width="3" stroke-dasharray="20,15" opacity="0.7"/>
+  <path d="M180,353 L280,349" stroke="#f59e0b" stroke-width="3" stroke-dasharray="20,15" opacity="0.7"/>
+  <path d="M340,348 L440,345" stroke="#f59e0b" stroke-width="3" stroke-dasharray="20,15" opacity="0.7"/>
+  <path d="M500,345 L570,344" stroke="#f59e0b" stroke-width="3" stroke-dasharray="20,15" opacity="0.7"/>
+  <!-- Truck body -->
+  <g transform="translate(180,250)">
+    <rect x="0" y="0" width="140" height="55" rx="4" fill="#1f2940" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect x="100" y="-25" width="40" height="80" rx="4" fill="#1a2130" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect x="108" y="-18" width="24" height="18" rx="2" fill="#3b82f6" opacity="0.4"/>
+    <circle cx="25" cy="55" r="14" fill="#111520" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="25" cy="55" r="7" fill="#1f2940"/>
+    <circle cx="100" cy="55" r="14" fill="#111520" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="100" cy="55" r="7" fill="#1f2940"/>
+    <!-- Headlights -->
+    <rect x="137" y="10" width="6" height="10" rx="2" fill="#f59e0b" opacity="0.9"/>
+    <ellipse cx="148" cy="15" rx="10" ry="6" fill="#f59e0b" opacity="0.15"/>
+  </g>
+  <!-- Route lines -->
+  <path d="M100,200 Q200,180 320,160 Q400,150 500,130" stroke="#3b82f6" stroke-width="2" stroke-dasharray="8,5" opacity="0.6"/>
+  <path d="M100,220 Q150,240 250,250 Q360,260 500,240" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,5" opacity="0.6"/>
+  <!-- Route labels -->
+  <rect x="70" y="185" width="90" height="22" rx="4" fill="#1a2130" stroke="#3b82f6" stroke-width="1"/>
+  <text x="115" y="200" font-family="sans-serif" font-size="10" fill="#3b82f6" text-anchor="middle">Ruta normal</text>
+  <rect x="55" y="240" width="100" height="22" rx="4" fill="#1a2130" stroke="#ef4444" stroke-width="1"/>
+  <text x="105" y="255" font-family="sans-serif" font-size="10" fill="#ef4444" text-anchor="middle">Ruta con desvío</text>
+  <!-- Stars -->
+  <circle cx="50" cy="40" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="120" cy="20" r="1" fill="white" opacity="0.5"/>
+  <circle cx="200" cy="50" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="350" cy="30" r="1" fill="white" opacity="0.5"/>
+  <circle cx="480" cy="50" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="560" cy="20" r="1" fill="white" opacity="0.4"/>
+  <!-- Cost indicator -->
+  <rect x="400" y="60" width="160" height="80" rx="12" fill="#1a2130" stroke="#3b82f6" stroke-width="1.5" opacity="0.9"/>
+  <text x="480" y="85" font-family="sans-serif" font-size="11" fill="#8a9bb8" text-anchor="middle">Costo adicional</text>
+  <text x="480" y="110" font-family="sans-serif" font-size="22" font-weight="bold" fill="#3b82f6" text-anchor="middle">+Bs 120</text>
+  <text x="480" y="128" font-family="sans-serif" font-size="10" fill="#4a5a78" text-anchor="middle">por semana</text>
+</svg>

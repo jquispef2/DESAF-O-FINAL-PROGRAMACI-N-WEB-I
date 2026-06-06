@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio de simuladores educativos — Programación Web I" />
+  <title>Portafolio | Simuladores Educativos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --color-bg:           #0a0d12;
+      --color-bg-2:         #111520;
+      --color-bg-alt:       #151b26;
+      --color-surface:      #1a2130;
+      --color-surface-2:    #1f2940;
+      --color-border:       #2a3550;
+      --color-border-light: #334060;
+
+      --color-primary:      #f59e0b;
+      --color-primary-dark: #d97706;
+      --color-primary-glow: rgba(245, 158, 11, 0.18);
+
+      --color-accent-a: #f59e0b;   /* carburantes — ámbar */
+      --color-accent-b: #3b82f6;   /* transporte  — azul  */
+      --color-accent-c: #ef4444;   /* escasez     — rojo  */
+
+      --color-text-primary:   #f0f4ff;
+      --color-text-secondary: #8a9bb8;
+      --color-text-muted:     #4a5a78;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --radius-md:  12px;
+      --radius-lg:  18px;
+      --radius-xl:  24px;
+      --transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-md:  0 4px 20px rgba(0,0,0,0.4);
+      --shadow-lg:  0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 13, 18, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 0 1.5rem;
+    }
+    .header__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header__brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: var(--color-text-primary);
+    }
+    .header__brand span {
+      color: var(--color-primary);
+    }
+    .header__nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .header__nav a {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      transition: color var(--transition);
+    }
+    .header__nav a:hover { color: var(--color-text-primary); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.12;
+    }
+    .hero__blob--1 {
+      width: 600px; height: 600px;
+      background: var(--color-primary);
+      top: -150px; left: -150px;
+    }
+    .hero__blob--2 {
+      width: 400px; height: 400px;
+      background: #3b82f6;
+      bottom: -100px; right: -100px;
+    }
+    .hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(42,53,80,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,53,80,0.25) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero__content {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 4rem;
+    }
+    .hero__badge {
+      display: inline-block;
+      background: var(--color-primary-glow);
+      color: var(--color-primary);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero__accent { color: var(--color-primary); }
+    .hero__desc {
+      max-width: 560px;
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+    .hero__scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .hero__scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--color-border-light);
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 5rem 1.5rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section__header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section__tag {
+      display: inline-block;
+      background: var(--color-primary-glow);
+      color: var(--color-primary);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section__subtitle {
+      color: var(--color-text-secondary);
+      max-width: 540px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Top color bar per project */
+    .project-card__bar {
+      height: 4px;
+      width: 100%;
+    }
+    .project-card--a .project-card__bar { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .project-card--b .project-card__bar { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .project-card--c .project-card__bar { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+    .project-card--a:hover { border-color: rgba(245,158,11,0.5); box-shadow: 0 8px 40px rgba(245,158,11,0.12); }
+    .project-card--b:hover { border-color: rgba(59,130,246,0.5);  box-shadow: 0 8px 40px rgba(59,130,246,0.12); }
+    .project-card--c:hover { border-color: rgba(239,68,68,0.5);   box-shadow: 0 8px 40px rgba(239,68,68,0.12); }
+
+    .project-card__body {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card__scenario {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .project-card--a .project-card__scenario { color: #f59e0b; }
+    .project-card--b .project-card__scenario { color: #3b82f6; }
+    .project-card--c .project-card__scenario { color: #ef4444; }
+
+    .project-card__title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+    .project-card__desc {
+      color: var(--color-text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+    .project-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .tag {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      font-size: 0.72rem;
+      color: var(--color-text-secondary);
+      padding: 0.2rem 0.6rem;
+      letter-spacing: 0.03em;
+    }
+    .project-card__footer {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.875rem;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      padding: 0.65rem 1.3rem;
+    }
+    .btn--primary-a { background: #f59e0b; color: #0a0d12; }
+    .btn--primary-a:hover { background: #fbbf24; }
+    .btn--primary-b { background: #3b82f6; color: #fff; }
+    .btn--primary-b:hover { background: #60a5fa; }
+    .btn--primary-c { background: #ef4444; color: #fff; }
+    .btn--primary-c:hover { background: #f87171; }
+    .btn--full { flex: 1; }
+
+    /* ── ABOUT SECTION ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .about__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 0.75rem;
+    }
+    .about__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .about__text {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .about__stat {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .about__stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .about__stat span {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── TECH STRIP ── */
+    .tech-strip {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: 2rem 1.5rem;
+    }
+    .tech-strip__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tech-strip__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .tech-strip__items {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tech-item {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--color-bg-2);
+      border-top: 1px solid var(--color-border);
+      padding: 3rem 1.5rem 2rem;
+    }
+    .footer__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .footer__brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+    .footer__brand span { color: var(--color-primary); }
+    .footer__credits p {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .footer__developer {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.5rem;
+    }
+    .footer__developer strong { color: var(--color-primary); }
+    .footer__copy {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .header__nav { display: none; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">Simu<span>Bolivia</span></div>
+      <ul class="header__nav">
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#sobre">Sobre el portafolio</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__grid"></div>
+      </div>
+      <div class="hero__content">
+        <div class="hero__badge">Programación Web I — 2026</div>
+        <h1 class="hero__title">
+          Portafolio de<br />
+          <span class="hero__accent">Simuladores</span><br />
+          Educativos
+        </h1>
+        <p class="hero__desc">
+          Tres herramientas interactivas que modelan situaciones económicas reales
+          de Bolivia: abastecimiento de carburantes, costos de transporte y
+          comportamiento de pánico ante rumores de escasez.
+        </p>
+        <div class="hero__scroll" aria-hidden="true">
+          <span class="hero__scroll-line"></span>
+          <span>Ver proyectos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STRIP -->
+    <div class="tech-strip" aria-label="Tecnologías utilizadas">
+      <div class="tech-strip__inner">
+        <span class="tech-strip__label">Tecnologías</span>
+        <div class="tech-strip__items">
+          <span class="tech-item">HTML5</span>
+          <span class="tech-item">CSS3</span>
+          <span class="tech-item">JavaScript</span>
+          <span class="tech-item">DOM API</span>
+          <span class="tech-item">CSS Variables</span>
+          <span class="tech-item">Responsive Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROYECTOS -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__tag">Proyectos</span>
+          <h2 class="section__title">Los tres simuladores</h2>
+          <p class="section__subtitle">
+            Cada simulador aborda una situación económica concreta con un modelo
+            matemático simple y resultados visuales en tiempo real.
+          </p>
+        </div>
+
+        <div class="cards-grid">
+
+          <!-- CARBURANTES -->
+          <article class="project-card project-card--a">
+            <div class="project-card__bar"></div>
+            <div class="project-card__body">
+              <span class="project-card__scenario">Escenario A</span>
+              <h3 class="project-card__title">Simulador de Abastecimiento de Carburantes</h3>
+              <p class="project-card__desc">
+                Calcula cuántos días durará la reserva de una estación de servicio
+                según su consumo diario, reabastecimiento y nivel crítico. Detecta
+                el momento exacto en que se alcanza la emergencia.
+              </p>
+              <div class="project-card__tags">
+                <span class="tag">Reservas</span>
+                <span class="tag">Proyección diaria</span>
+                <span class="tag">Nivel crítico</span>
+                <span class="tag">Escasez</span>
+              </div>
+              <div class="project-card__footer">
+                <a href="simulador-carburantes/index.html" class="btn btn--primary-a btn--full">
+                  Abrir simulador
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- TRANSPORTE -->
+          <article class="project-card project-card--b">
+            <div class="project-card__bar"></div>
+            <div class="project-card__body">
+              <span class="project-card__scenario">Escenario C</span>
+              <h3 class="project-card__title">Simulador de Costo de Transporte</h3>
+              <p class="project-card__desc">
+                Estima el impacto económico de bloqueos y desvíos en el costo
+                semanal y mensual de traslado. Compara la ruta normal versus
+                la ruta alternativa en términos de gasto real.
+              </p>
+              <div class="project-card__tags">
+                <span class="tag">Bloqueos</span>
+                <span class="tag">Desvíos</span>
+                <span class="tag">Costo/km</span>
+                <span class="tag">Proyección semanal</span>
+              </div>
+              <div class="project-card__footer">
+                <a href="simulador-transporte/index.html" class="btn btn--primary-b btn--full">
+                  Abrir simulador
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ESCASEZ -->
+          <article class="project-card project-card--c">
+            <div class="project-card__bar"></div>
+            <div class="project-card__body">
+              <span class="project-card__scenario">Escenario E</span>
+              <h3 class="project-card__title">Simulador de Rumor de Escasez y Pánico</h3>
+              <p class="project-card__desc">
+                Modela cómo un rumor de desabastecimiento dispara las compras
+                por pánico, multiplica la demanda y agota el stock disponible
+                mucho antes de lo previsto.
+              </p>
+              <div class="project-card__tags">
+                <span class="tag">Rumor</span>
+                <span class="tag">Pánico</span>
+                <span class="tag">Stock</span>
+                <span class="tag">Demanda</span>
+              </div>
+              <div class="project-card__footer">
+                <a href="simulador-escasez/index.html" class="btn btn--primary-c btn--full">
+                  Abrir simulador
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="sobre" style="background: var(--color-bg-2); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <p class="about__label">Sobre el portafolio</p>
+            <h2 class="about__title">Simulaciones con contexto boliviano real</h2>
+            <p class="about__text">
+              Cada simulador toma como base situaciones que Bolivia ha vivido en los
+              últimos años: la escasez de combustible, los bloqueos de carreteras
+              y el comportamiento de pánico ante rumores de desabastecimiento.
+            </p>
+            <p class="about__text">
+              El objetivo es aplicar modelos matemáticos simples para entender
+              fenómenos económicos complejos, usando únicamente JavaScript vanilla
+              y sin dependencias externas.
+            </p>
+          </div>
+          <div class="about__stats">
+            <div class="about__stat">
+              <strong>3</strong>
+              <span>Simuladores</span>
+            </div>
+            <div class="about__stat">
+              <strong>9</strong>
+              <span>Casos de estudio</span>
+            </div>
+            <div class="about__stat">
+              <strong>0</strong>
+              <span>Dependencias</span>
+            </div>
+            <div class="about__stat">
+              <strong>3</strong>
+              <span>Escenarios</span>
+            </div>
+            <div class="about__stat">
+              <strong>100%</strong>
+              <span>Vanilla JS</span>
+            </div>
+            <div class="about__stat">
+              <strong>2026</strong>
+              <span>Año</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">Simu<span>Bolivia</span></div>
+      <div class="footer__credits">
+        <p><strong>Proyecto Final — Programación Web I</strong></p>
+        <p>Desarrollado con HTML5, CSS3 y JavaScript Vanilla</p>
+      </div>
+      <p class="footer__developer">
+        Proyecto desarrollado por <strong>Johann Edibert Quispe Flores</strong>
+      </p>
+      <p class="footer__copy">
+        &copy; 2026 &middot; Simuladores educativos. No representa posición política alguna.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

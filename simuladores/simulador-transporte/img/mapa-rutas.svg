@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" fill="none">
+  <rect width="500" height="300" rx="12" fill="#111520"/>
+  <!-- Grid -->
+  <g stroke="#1a2130" stroke-width="1">
+    <line x1="0" y1="60" x2="500" y2="60"/>
+    <line x1="0" y1="120" x2="500" y2="120"/>
+    <line x1="0" y1="180" x2="500" y2="180"/>
+    <line x1="0" y1="240" x2="500" y2="240"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+    <line x1="400" y1="0" x2="400" y2="300"/>
+  </g>
+  <!-- Normal route -->
+  <path d="M60,240 L160,240 L160,120 L340,120 L340,240 L440,240" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Detour route -->
+  <path d="M60,240 L60,60 L440,60 L440,240" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="10,6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Block point -->
+  <rect x="230" y="108" width="24" height="24" rx="4" fill="#ef4444" opacity="0.9"/>
+  <text x="242" y="124" font-family="sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">✕</text>
+  <text x="242" y="142" font-family="sans-serif" font-size="8" fill="#ef4444" text-anchor="middle">Bloqueo</text>
+  <!-- Start point -->
+  <circle cx="60" cy="240" r="12" fill="#10b981"/>
+  <text x="60" y="244" font-family="sans-serif" font-size="9" font-weight="bold" fill="white" text-anchor="middle">A</text>
+  <!-- End point -->
+  <circle cx="440" cy="240" r="12" fill="#f59e0b"/>
+  <text x="440" y="244" font-family="sans-serif" font-size="9" font-weight="bold" fill="white" text-anchor="middle">B</text>
+  <!-- Legend -->
+  <rect x="10" y="10" width="170" height="55" rx="6" fill="#1a2130" opacity="0.9"/>
+  <line x1="20" y1="28" x2="50" y2="28" stroke="#3b82f6" stroke-width="2"/>
+  <text x="55" y="32" font-family="sans-serif" font-size="9" fill="#8a9bb8">Ruta normal (10 km)</text>
+  <line x1="20" y1="48" x2="50" y2="48" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="55" y="52" font-family="sans-serif" font-size="9" fill="#8a9bb8">Ruta desvío (18 km)</text>
+  <!-- Distance labels -->
+  <text x="250" y="115" font-family="sans-serif" font-size="9" fill="#3b82f6" text-anchor="middle">10 km</text>
+  <text x="250" y="55" font-family="sans-serif" font-size="9" fill="#ef4444" text-anchor="middle">18 km</text>
+</svg>
